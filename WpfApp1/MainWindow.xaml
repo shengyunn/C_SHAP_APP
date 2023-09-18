@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Label Content="請輸入一個數值N " HorizontalAlignment="Left" Margin="75,60,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFFC0404"/>
+        <TextBox HorizontalAlignment="Left" Margin="255,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" FontSize="18" Name="textbox1" Background="#FFE5BCBC"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="533,63,0,0" VerticalAlignment="Top" FontSize="18" Width="80" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="75,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="117" Width="564" Background="#FFBCA9F1" Name="block1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="75,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="564" Height="122" Background="#FF8631ED" Foreground="White" Name="block2"/>
 
     </Grid>
 </Window>
