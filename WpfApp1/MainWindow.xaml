@@ -5,13 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Label Content="請輸入一個數值N " HorizontalAlignment="Left" Margin="75,60,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFFC0404"/>
-        <TextBox HorizontalAlignment="Left" Margin="255,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" FontSize="18" Name="textbox1" Background="#FFE5BCBC"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="533,63,0,0" VerticalAlignment="Top" FontSize="18" Width="80" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="117" Width="564" Background="#FFBCA9F1" Name="block1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="564" Height="122" Background="#FF8631ED" Foreground="White" Name="block2"/>
+        Title="MainWindow" d:DesignHeight="536.24" d:DesignWidth="1061.6">
+    <Grid Margin="0,0,0,-15" HorizontalAlignment="Center" Width="800">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="377*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Label Content="請輸入一個數值N " FontSize="20" Foreground="#FF515A5A" HorizontalAlignment="Left" Width="186" Margin="114,12,0,0" Height="57" VerticalAlignment="Top" Background="#00000000" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Cascadia Mono Light" Grid.Column="1"/>
+        <TextBox TextWrapping="Wrap" Text="" FontSize="18" x:Name="textbox1" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" HorizontalAlignment="Left" Width="243" Margin="115,74,0,0" Height="34" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1"/>
+        <Border x:Name="buttonBorder" Background="LightGray" CornerRadius="15" Margin="398,74,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76" Grid.Column="1">
+            <Button Content="      OK" Click="Button_Click" RenderTransformOrigin="0.369,0.541" VerticalAlignment="Center" Width="57"  >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Border>
+
+        <TextBlock Margin="39,142,0,0" TextWrapping="Wrap" Text="" x:Name="block1" Height="323" VerticalAlignment="Top" HorizontalAlignment="Left" Width="214" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.ColumnSpan="2"/>
+        <TextBlock Margin="273,142,0,0" TextWrapping="Wrap" Text="" x:Name="block2" HorizontalAlignment="Left" Width="471" Height="323" VerticalAlignment="Top" Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+        <Image HorizontalAlignment="Left" Height="96" Margin="39,12,0,0" VerticalAlignment="Top" Width="97" Source="/cat1.jpeg" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
