@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="121,106,0,0" TextWrapping="Wrap" Text="" Name="TextBox01"  VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="121,154,0,0" TextWrapping="Wrap" Text="" Name="TextBox02"  VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="121,200,0,0" TextWrapping="Wrap" Text="" Name="TextBox03"  VerticalAlignment="Top" Width="120"/>
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="246,277,0,0" VerticalAlignment="Top" Height="27" Width="74" Click="Button_Click"/>
+        <Label Content="輸入三個數值，判斷是否可以構成三角形" HorizontalAlignment="Left" Margin="68,44,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Height="60" Margin="434,244,0,0" TextWrapping="Wrap" Text=""  Name="Cout" VerticalAlignment="Top" Width="111"/>
+        <TextBlock HorizontalAlignment="Left" Margin="601,144,0,0" TextWrapping="Wrap" Text="" Name="Couttest" VerticalAlignment="Top" Height="73" Width="117"/>
 
     </Grid>
 </Window>

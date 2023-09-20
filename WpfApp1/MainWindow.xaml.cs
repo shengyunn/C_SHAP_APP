@@ -24,5 +24,62 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+        void swap( Double a, Double b)
+
+        {
+            Double tmp;
+            tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Double numberA,numberB,numberC;
+
+            bool A1 = Double.TryParse(TextBox01.Text, out numberA);
+            bool B2 = Double.TryParse(TextBox02.Text, out numberB);
+            bool C3 = Double.TryParse(TextBox03.Text, out numberC);
+            
+            if( !A1 || !B2 || !C3)
+            {
+                MessageBox.Show("請輸入整數", "輸入錯誤");
+            }
+            else if (numberA <=0 || numberB <=0 || numberC<=0) 
+            {
+                MessageBox.Show($"輸入的值不可小於0，請重新輸入","輸入錯誤");
+            }
+            else
+            {
+                if (numberA > numberB)
+                {
+                    double temp = numberA;
+                    numberA = numberB;
+                    numberB = temp;
+                }
+
+                if (numberB > numberC)
+                {
+                    double temp = numberB;
+                    numberB = numberC;
+                    numberC = temp;
+                }
+
+                if (numberA > numberB)
+                {
+                    double temp = numberA;
+                    numberA = numberB;
+                    numberB = temp;
+                }
+                Double sumAB = numberA + numberB;
+                if (numberC < sumAB)
+                {
+                    string output = $"{numberA},{numberB},{numberC}\n可以構成三角形";
+                    Cout.Text = output ;
+                }
+                string test = $"{numberA},{numberB},{numberC}";
+                Couttest.Text = test;
+            }
+        }
     }
 }
