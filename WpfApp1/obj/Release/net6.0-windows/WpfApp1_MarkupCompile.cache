@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\ryan0\source\repos\shengyunn\C_SHAP_APP\WpfApp1\obj\Debug\net6.0-windows\
+C:\Users\ryan0\source\repos\shengyunn\C_SHAP_APP\WpfApp1\obj\Release\net6.0-windows\
 WpfApp1
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\Users\ryan0\source\repos\shengyunn\C_SHAP_APP\WpfApp1\App.xaml
 11407045341
 
@@ -16,5 +16,5 @@ C:\Users\ryan0\source\repos\shengyunn\C_SHAP_APP\WpfApp1\App.xaml
 194101785492
 MainWindow.xaml;
 
-False
+True
 
