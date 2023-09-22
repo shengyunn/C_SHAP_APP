@@ -24,14 +24,6 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-        void swap( Double a, Double b)
-
-        {
-            Double tmp;
-            tmp = a;
-            a = b;
-            b = tmp;
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -51,35 +43,27 @@ namespace WpfApp1
             }
             else
             {
-                if (numberA > numberB)
+               if(numberA + numberB > numberC && numberB + numberC > numberA && numberA + numberC > numberB) 
                 {
-                    double temp = numberA;
-                    numberA = numberB;
-                    numberB = temp;
+                    string success = $"{numberA},{numberB},{numberC}\n可以構成三角形";
+                    Cout.Text = success;
+                    TextboxReset();
                 }
-
-                if (numberB > numberC)
+                else
                 {
-                    double temp = numberB;
-                    numberB = numberC;
-                    numberC = temp;
+                    string Unable = $"{numberA},{numberB},{numberC}\n無法構成三角形";
+                    Cout.Text= Unable;
+                    TextboxReset();
                 }
-
-                if (numberA > numberB)
-                {
-                    double temp = numberA;
-                    numberA = numberB;
-                    numberB = temp;
-                }
-                Double sumAB = numberA + numberB;
-                if (numberC < sumAB)
-                {
-                    string output = $"{numberA},{numberB},{numberC}\n可以構成三角形";
-                    Cout.Text = output ;
-                }
-                string test = $"{numberA},{numberB},{numberC}";
-                Couttest.Text = test;
             }
+        }
+
+        private void TextboxReset()
+        {
+            TextBox01.Text = "";
+            TextBox02.Text = "";
+            TextBox03.Text = "";
+
         }
     }
 }
