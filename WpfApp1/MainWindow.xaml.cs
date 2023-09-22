@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -20,9 +11,11 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Triangle> triangles = new List<Triangle>();
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,29 +26,24 @@ namespace WpfApp1
             bool B2 = Double.TryParse(TextBox02.Text, out numberB);
             bool C3 = Double.TryParse(TextBox03.Text, out numberC);
             
-            if( !A1 || !B2 || !C3)
+            if( !A1 || !B2 || !C3 || numberA <=0 || numberB <=0 || numberC<=0)
             {
-                MessageBox.Show("請輸入整數", "輸入錯誤");
+                MessageBox.Show("請輸入正確數值不可小於0或是空白", "輸入錯誤");
+                return;
             }
-            else if (numberA <=0 || numberB <=0 || numberC<=0) 
+            Triangle triangle = new Triangle(numberA, numberB, numberC);
+            if (triangle.IsValid)
             {
-                MessageBox.Show($"輸入的值不可小於0，請重新輸入","輸入錯誤");
+                ltest.Content = $"邊長 {numberA}, {numberB}, {numberC} 可以構成三角形";
+                ltest.Background = Brushes.Green;
             }
             else
             {
-               if(numberA + numberB > numberC && numberB + numberC > numberA && numberA + numberC > numberB) 
-                {
-                    string success = $"{numberA},{numberB},{numberC}\n可以構成三角形";
-                    Cout.Text = success;
-                    TextboxReset();
-                }
-                else
-                {
-                    string Unable = $"{numberA},{numberB},{numberC}\n無法構成三角形";
-                    Cout.Text= Unable;
-                    TextboxReset();
-                }
+                ltest.Content = $"邊長 {numberA}, {numberB}, {numberC} 不可構成三角形";
+                ltest.Background = Brushes.Red;
             }
+            Cout.Text += $"{ltest.Content}\n";
+            TextboxReset();
         }
 
         private void TextboxReset()
