@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WpfApp1
@@ -44,6 +45,22 @@ namespace WpfApp1
             }
             Cout.Text += $"{ltest.Content}\n";
             TextboxReset();
+        }
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // 防止換行
+                e.Handled = true;
+
+                // 尋找下一個 TextBox
+                TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Next);
+                UIElement elementWithFocus = Keyboard.FocusedElement as UIElement;
+                if (elementWithFocus != null)
+                {
+                    elementWithFocus.MoveFocus(request);
+                }
+            }
         }
 
         private void TextboxReset()

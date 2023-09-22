@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="198,122,0,0" TextWrapping="Wrap" Text="" Name="TextBox01"  VerticalAlignment="Top" Width="100" Height="40" TextAlignment="Center" FontSize="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="198,184,0,0" TextWrapping="Wrap" Text="" Name="TextBox02"  VerticalAlignment="Top" Width="100" Height="40" TextAlignment="Center" FontSize="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="198,242,0,0" TextWrapping="Wrap" Text="" Name="TextBox03"  VerticalAlignment="Top" Width="100" Height="40" FontSize="18" TextAlignment="Center"/>
+        <TextBox HorizontalAlignment="Left" Margin="198,122,0,0" TextWrapping="Wrap" Text="" Name="TextBox01"  VerticalAlignment="Top" Width="100" Height="40" TextAlignment="Center" FontSize="18"  PreviewKeyDown="TextBox_PreviewKeyDown"/>
+        <TextBox HorizontalAlignment="Left" Margin="198,184,0,0" TextWrapping="Wrap" Text="" Name="TextBox02"  VerticalAlignment="Top" Width="100" Height="40" TextAlignment="Center" FontSize="18"  PreviewKeyDown="TextBox_PreviewKeyDown"/>
+        <TextBox HorizontalAlignment="Left" Margin="198,242,0,0" TextWrapping="Wrap" Text="" Name="TextBox03"  VerticalAlignment="Top" Width="100" Height="40" TextAlignment="Center" FontSize="18"  PreviewKeyDown="TextBox_PreviewKeyDown"/>
         <Button Content="Submit" HorizontalAlignment="Left" Margin="198,321,0,0" VerticalAlignment="Top" Height="28" Width="100" Click="Button_Click"/>
         <Label Content="輸入三個數值，判斷是否可以構成三角形" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" Height="58" Width="481" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="22" FontFamily="Yu Gothic UI Semilight"/>
-        <TextBlock HorizontalAlignment="Left" Height="176" Margin="480,202,0,0"  Name="Cout" VerticalAlignment="Top" Width="215" Background="#FFDAB3B3" FontSize="16" TextAlignment="Center" TextWrapping="Wrap" Padding="0,0,0,10" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True"/>
+        <TextBlock HorizontalAlignment="Left" Height="176" Margin="480,202,0,0"  Name="Cout" VerticalAlignment="Top" Width="215" FontSize="16" TextAlignment="Center" TextWrapping="Wrap" Padding="0,0,0,10" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True">
+            <TextBlock.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+            </TextBlock.Background>
+        </TextBlock>
 
         <Label Content="" HorizontalAlignment="Left" Margin="480,108,0,0" VerticalAlignment="Top" Height="67" Width="215" Name="ltest" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Foreground="White" />
         <Image HorizontalAlignment="Left" Height="100" Margin="48,24,0,0" VerticalAlignment="Top" Width="100" Source="/cat1.jpeg"/>
