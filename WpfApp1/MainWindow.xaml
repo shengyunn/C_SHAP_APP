@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="499*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Left" Height="256" Margin="142,45,0,0" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/cat1.jpeg"/>
+            </StackPanel.Background>
+            <StackPanel Height="48" Width="400" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+                <Label Content="Label" Width="141" Height="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Label" Width="70" Height="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
+
+            </StackPanel>
+            <StackPanel Height="48" Width="400"/>
+            <StackPanel Height="48" Width="400"/>
+            <StackPanel Height="48" Width="400"/>
+            <StackPanel Height="48" Width="400"/>
+            <StackPanel Height="48" Width="400"/>
+        </StackPanel>
 
     </Grid>
 </Window>
