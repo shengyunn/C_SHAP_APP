@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace WpfApp1
 {
@@ -16,8 +18,18 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            timer.Interval = TimeSpan.FromSeconds(0.099);
+            timer.Tick += Timer_Tick;
+
+            originalBitmap = new BitmapImage();
+            originalBitmap.BeginInit();
+            originalBitmap.UriSource = new Uri(originalImagePath, UriKind.Relative);
+            originalBitmap.EndInit();
+            cat.Source = originalBitmap;
         }
+
+   
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -27,7 +39,7 @@ namespace WpfApp1
             bool B2 = Double.TryParse(TextBox02.Text, out numberB);
             bool C3 = Double.TryParse(TextBox03.Text, out numberC);
             
-            if( !A1 || !B2 || !C3 || numberA <=0 || numberB <=0 || numberC<=0)
+            if ( !A1 || !B2 || !C3 || numberA <=0 || numberB <=0 || numberC<=0)
             {
                 MessageBox.Show("請輸入正確數值不可小於0或是空白", "輸入錯誤");
                 return;
@@ -36,7 +48,8 @@ namespace WpfApp1
             if (triangle.IsValid)
             {
                 ltest.Content = $"邊長 {numberA}, {numberB}, {numberC} 可以構成三角形";
-                ltest.Background = Brushes.Green;
+                ltest.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5FEB64"));
+
             }
             else
             {
@@ -45,6 +58,15 @@ namespace WpfApp1
             }
             Cout.Text += $"{ltest.Content}\n";
             TextboxReset();
+            string newImgagePath = "cat2.jpeg";
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(newImgagePath, UriKind.Relative);
+            bitmap.EndInit();
+            cat.Source = bitmap;
+            timer.Start();
+            
+
         }
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -62,7 +84,22 @@ namespace WpfApp1
                 }
             }
         }
+        private DispatcherTimer timer = new DispatcherTimer();
 
+        private string originalImagePath = "cat1.jpeg"; 
+     
+        private BitmapImage originalBitmap;
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+
+            // 停止計時器
+            timer.Stop();
+
+            // 切換回原始圖片
+            cat.Source = originalBitmap;
+
+        }
         private void TextboxReset()
         {
             TextBox01.Text = "";

@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="cat1.jpeg" />
+    <None Remove="cat2.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="cat1.jpeg" />
+    <Resource Include="cat2.jpeg" />
   </ItemGroup>
 
 </Project>
