@@ -25,9 +25,49 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            
             //add all drinks list
             AddNewDrinks(drinks);
 
+            //display drinks menu
+            DisplayDrinkMenu(drinks);
+
+        }
+
+        private void DisplayDrinkMenu(Dictionary<string, int> mydrinks)
+        {
+            foreach (var drink in mydrinks)
+            {
+                StackPanel sp = new StackPanel();
+                sp.Orientation = Orientation.Horizontal;
+
+                CheckBox cb = new CheckBox();
+                cb.Content = $"{drink.Key} : {drink.Value}元";
+                cb.Width = 200 ;
+                cb.FontFamily = new FontFamily("Consolas");
+                cb.FontSize = 18;
+                cb.Foreground = Brushes.Blue;
+                cb.Margin = new Thickness(5);
+
+                Slider sl = new Slider();
+                sl.Width = 100 ;
+                sl.Value = 0 ;
+                sl.Minimum = 0;
+                sl.Maximum = 10 ;
+
+                Label lb = new Label();
+                lb.Width = 50 ;
+                lb.Content = "0";
+                lb.FontFamily = new FontFamily("Consolas");
+                lb.FontSize = 18;
+                lb.Foreground = Brushes.Red;
+
+                sp.Children.Add(cb);
+                sp.Children.Add(sl);
+                sp.Children.Add(lb);
+                stackpenal_DrinkMenu.Children.Add(sp);
+
+            }
         }
 
         private void AddNewDrinks(Dictionary<string, int> mydrinks)

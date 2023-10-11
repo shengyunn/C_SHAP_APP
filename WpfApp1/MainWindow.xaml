@@ -7,39 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Height="247" Margin="70,10,0,0" Width="518" Background="#FFE2D1BD" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="紅茶大杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="60元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="紅茶小杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="40元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="綠茶大杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="60元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="綠茶小杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="40元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="咖啡大杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="80元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-                <Label Content="咖啡小杯" FontSize="16" FontWeight="Bold" Width="230" VerticalAlignment="Center"/>
-                <Label Content="50元" FontSize="18" FontWeight="Bold" Width="165" Foreground="#FFFF0202" VerticalAlignment="Center"/>
-                <TextBox Width="100" TextChanged="TextBox_TextChanged" TextAlignment="Right" FontSize="18"/>
-            </StackPanel>
-
-        </StackPanel>
+        <StackPanel x:Name="stackpenal_DrinkMenu" Margin="70,10,0,0" Width="518" Background="#FFE2D1BD" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="OrderButton" Content="確定訂購" HorizontalAlignment="Left" Margin="642,64,0,0" VerticalAlignment="Top" Height="51" Width="114" Click="OrderButton_Click"/>
         <TextBlock x:Name="textblock1" HorizontalAlignment="Left" Height="150" Margin="70,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="518" FontSize="18">
             <TextBlock.Background>
