@@ -1,17 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -23,6 +18,8 @@ namespace WpfApp1
         Dictionary<string,int> drinks = new Dictionary<string,int>();
         Dictionary<string,int> orders = new Dictionary<string,int>();
         string takeout = "";
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,30 +36,39 @@ namespace WpfApp1
         {
             foreach (var drink in mydrinks)
             {
-                StackPanel sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
+                var sp = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal
+                };
 
-                CheckBox cb = new CheckBox();
-                cb.Content = $"{drink.Key} : {drink.Value}元";
-                cb.Width = 200;
-                cb.FontFamily = new FontFamily("Consolas");
-                cb.FontSize = 18;
-                cb.Foreground = Brushes.Blue;
-                cb.Margin = new Thickness(5);
+                CheckBox cb = new CheckBox
+                {
+                    Content = $"{drink.Key} : {drink.Value}元",
+                    Width = 200,
+                    FontFamily = new FontFamily("Consolas"),
+                    FontSize = 18,
+                    Foreground = Brushes.Blue,
+                    Margin = new Thickness(5)
+                };
 
-                Slider sl = new Slider();
-                sl.Width = 100;
-                sl.Value = 0;
-                sl.Minimum = 0;
-                sl.Maximum = 10;
-                sl.IsSnapToTickEnabled = true;
+                var sl = new Slider
+                {
+                    Width = 100,
+                    Value = 0,
+                    Minimum = 0,
+                    Maximum = 10,
+                    IsSnapToTickEnabled = true,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
 
-                Label lb = new Label();
-                lb.Width = 50;
-                lb.Content = "0";
-                lb.FontFamily = new FontFamily("Consolas");
-                lb.FontSize = 18;
-                lb.Foreground = Brushes.Red;
+                var lb = new Label
+                {
+                    Width = 50,
+                    Content = "0",
+                    FontFamily = new FontFamily("Consolas"),
+                    FontSize = 18,
+                    Foreground = Brushes.Red
+                };
 
                 sp.Children.Add(cb);
                 sp.Children.Add(sl);
@@ -80,12 +86,27 @@ namespace WpfApp1
 
         private void AddNewDrinks(Dictionary<string, int> mydrinks)
         {
-            mydrinks.Add("紅茶大杯", 60);
-            mydrinks.Add("紅茶小杯", 40);
-            mydrinks.Add("綠茶大杯", 60);
-            mydrinks.Add("綠茶小杯", 40);
-            mydrinks.Add("咖啡大杯", 80);
-            mydrinks.Add("咖啡小杯", 50);
+            //  mydrinks.Add("紅茶大杯", 60);
+            //  mydrinks.Add("紅茶小杯", 40);
+            //  mydrinks.Add("綠茶大杯", 60);
+            //  mydrinks.Add("綠茶小杯", 40);
+            //  mydrinks.Add("咖啡大杯", 80);
+            //  mydrinks.Add("咖啡小杯", 50);
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV檔|*.csv|文字檔|*.txt|全部檔案|*.*";
+            if (openFileDialog.ShowDialog()==true) 
+            {
+                string filename = openFileDialog.FileName;
+                string[] lines = File.ReadAllLines(filename);
+                foreach(var line in lines)
+                {
+                    string[] tokens = line.Split(',');
+                    string drinkName = tokens[0];
+                    int price = int.Parse(tokens[1]);
+                    mydrinks.Add(drinkName, price);
+                }
+            }
         }
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
@@ -93,42 +114,74 @@ namespace WpfApp1
             //將訂購的飲料加入訂單
             PlaceOrder(orders);
 
+            //顯示訂單名細
+            DisplayOrder(orders);
+        }
+
+        private void DisplayOrder(Dictionary<string, int> myOrders)
+        {
+            displayTextBlock.Inlines.Clear();
+            Run titleString = new Run
+            {
+                Text = "您所訂購的飲品為",
+                FontSize = 16,
+                Foreground = Brushes.Blue
+            };
+            Run takeoutString = new Run
+            {
+                Text = $"{takeout}",
+                FontSize = 16,
+                FontWeight = FontWeights.Bold
+            };
+            displayTextBlock.Inlines.Add(titleString);
+            displayTextBlock.Inlines.Add(takeoutString);
+            displayTextBlock.Inlines.Add(new Run() { Text = " ，訂購明細如下: \n", FontSize = 16 });
             double total = 0.0;
             double sellPrice = 0.0;
-            string displayString = $"本次訂購清單為{takeout}，清單如下:\n";
-            string message = "";
-
-            foreach(KeyValuePair<string, int> item in orders)
+            //string displayString = $"本次訂購清單為{takeout}，清單如下:\n";
+            string discountString = "";
+            int i = 1;
+            foreach (var item in myOrders)
             {
                 string drinkName = item.Key;
-                int amount = orders[drinkName];
+                int quantity = myOrders[drinkName];
                 int price = drinks[drinkName];
-                total += price * amount;
-                displayString += $"{drinkName} X {amount}杯，每杯 {price}元，總共 {price * amount}元\n";
+                total += price * quantity;
+                displayTextBlock.Inlines.Add(new Run() { Text = $"飲料品項{i}： {drinkName} X {quantity}杯，每杯{price}元，總共{price * quantity}元\n" });
+                i++;
+                //displayString += $"{drinkName} X {quantity}杯，每杯 {price}元，總共 {price * quantity}元\n";
             }
 
             if (total >= 500)
             {
-                message = "訂購滿500元以上者8折";
+                discountString = "訂購滿500元以上者8折";
                 sellPrice = total * 0.8;
             }
             else if (total >= 300)
             {
-                message = "訂購滿300元以上者85折";
+                discountString = "訂購滿300元以上者85折";
                 sellPrice = total * 0.85;
             }
             else if (total >= 200)
             {
-                message = "訂購滿200元以上者9折";
+                discountString = "訂購滿200元以上者9折";
                 sellPrice = total * 0.9;
             }
             else
             {
-                message = "訂購未滿200元以上不打折";
+                discountString = "訂購未滿200元以上不打折";
                 sellPrice = total;
             }
-            displayString += $"本次訂購總共{orders.Count}項，{message}，售價{sellPrice}元";
-            textblock1.Text = displayString;
+            Italic summaryString = new Italic(new Run
+            {
+                Text = $"本次訂購總共{myOrders.Count}項，{discountString}，售價{sellPrice}元",
+                FontSize = 16,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.Red
+            });
+            displayTextBlock.Inlines.Add(summaryString);
+            //displayString += $"本次訂購總共{myOrders.Count}項，{message}，售價{sellPrice}元";
+            //displayTextBlock.Text = displayString;
         }
 
         private void PlaceOrder(Dictionary<string, int> myOrders)
@@ -136,9 +189,9 @@ namespace WpfApp1
             myOrders.Clear();
             for(int i = 0; i < stackpenal_DrinkMenu.Children.Count; i++)
             {
-                StackPanel sp = stackpenal_DrinkMenu.Children[i] as StackPanel;
-                CheckBox cb = sp.Children[0] as CheckBox;
-                Slider sl = sp.Children[1] as Slider;
+                var sp = stackpenal_DrinkMenu.Children[i] as StackPanel;
+                var cb = sp.Children[0] as CheckBox;
+                var sl = sp.Children[1] as Slider;
                 string drinkName = cb.Content.ToString().Substring(0,4);
                 int quantity = Convert.ToInt32(sl.Value);
 
@@ -155,5 +208,31 @@ namespace WpfApp1
             if(rb.IsChecked == true) takeout = rb.Content.ToString();
             
         }
+
+        private void smuit_Click(object sender, RoutedEventArgs e)
+        {
+            // 使用 SaveFileDialog 讓使用者指定儲存位置和檔名
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "文字檔|*.txt";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filename = saveFileDialog.FileName;
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    writer.WriteLine("您所訂購的飲品名細：");
+                    foreach (var item in orders)
+                    {
+                        string drinkName = item.Key;
+                        int quantity = item.Value;
+                        int price = drinks[drinkName];
+                        writer.WriteLine($"{drinkName} X {quantity}杯，每杯{price}元，總共{price * quantity}元");
+
+                    }
+                    writer.Close();
+                }
+            };
+        }
+
+
     }
 }

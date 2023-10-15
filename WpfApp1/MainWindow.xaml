@@ -17,11 +17,12 @@
 
         <StackPanel x:Name="stackpenal_DrinkMenu" Margin="22,90,0,0" Width="615" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="OrderButton" Content="確定訂購" HorizontalAlignment="Left" Margin="642,90,0,0" VerticalAlignment="Top" Height="51" Width="114" Click="OrderButton_Click"/>
-        <TextBlock x:Name="textblock1" HorizontalAlignment="Left" Margin="22,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="615" FontSize="18">
+        <TextBlock x:Name="displayTextBlock" HorizontalAlignment="Left" Margin="22,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="615" FontSize="18">
             <TextBlock.Background>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
             </TextBlock.Background>
         </TextBlock>
+        <Button x:Name="smuit" Content="輸出成TXT檔案" HorizontalAlignment="Left" Margin="642,408,0,0" VerticalAlignment="Top" Height="51" Width="114" Click="smuit_Click" />
 
     </Grid>
 </Window>
