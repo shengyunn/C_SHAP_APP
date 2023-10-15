@@ -90,9 +90,12 @@ namespace WpfApp1
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
+            //將訂購的飲料加入訂單
+            PlaceOrder(orders);
+
             double total = 0.0;
             double sellPrice = 0.0;
-            string displayString = "訂購清單如下:\n";
+            string displayString = $"本次訂購清單為{takeout}，清單如下:\n";
             string message = "";
 
             foreach(KeyValuePair<string, int> item in orders)
@@ -128,11 +131,29 @@ namespace WpfApp1
             textblock1.Text = displayString;
         }
 
+        private void PlaceOrder(Dictionary<string, int> myOrders)
+        {
+            myOrders.Clear();
+            for(int i = 0; i < stackpenal_DrinkMenu.Children.Count; i++)
+            {
+                StackPanel sp = stackpenal_DrinkMenu.Children[i] as StackPanel;
+                CheckBox cb = sp.Children[0] as CheckBox;
+                Slider sl = sp.Children[1] as Slider;
+                string drinkName = cb.Content.ToString().Substring(0,4);
+                int quantity = Convert.ToInt32(sl.Value);
+
+                if(cb.IsChecked==true && quantity != 0)
+                {
+                    myOrders.Add(drinkName, quantity);
+                }
+            }
+        }
+
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var rb = sender as RadioButton;
             if(rb.IsChecked == true) takeout = rb.Content.ToString();
-            MessageBox.Show(takeout);
+            
         }
     }
 }
