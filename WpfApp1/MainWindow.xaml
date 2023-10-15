@@ -5,13 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <StackPanel x:Name="stackpenal_DrinkMenu" Margin="70,10,0,0" Width="518" Background="#FFE2D1BD" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button x:Name="OrderButton" Content="確定訂購" HorizontalAlignment="Left" Margin="642,64,0,0" VerticalAlignment="Top" Height="51" Width="114" Click="OrderButton_Click"/>
-        <TextBlock x:Name="textblock1" HorizontalAlignment="Left" Height="150" Margin="70,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="518" FontSize="18">
+        <GroupBox Header="內用/外帶" Width="615" Margin="22,17,0,0" Background="#FFF7F7E6" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <RadioButton Content="堂食" Width="100" IsChecked="True" FontSize="18" VerticalContentAlignment="Center" Checked="RadioButton_Checked" />
+                <RadioButton Content="外帶" Width="100" FontSize="18" VerticalContentAlignment="Center" Checked="RadioButton_Checked" />
+
+            </StackPanel>
+        </GroupBox>
+
+        <StackPanel x:Name="stackpenal_DrinkMenu" Margin="22,90,0,0" Width="615" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="OrderButton" Content="確定訂購" HorizontalAlignment="Left" Margin="642,90,0,0" VerticalAlignment="Top" Height="51" Width="114" Click="OrderButton_Click"/>
+        <TextBlock x:Name="textblock1" HorizontalAlignment="Left" Height="129" Margin="22,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="615" FontSize="18">
             <TextBlock.Background>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
             </TextBlock.Background>
         </TextBlock>
 

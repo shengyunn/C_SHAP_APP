@@ -22,6 +22,7 @@ namespace WpfApp1
     {
         Dictionary<string,int> drinks = new Dictionary<string,int>();
         Dictionary<string,int> orders = new Dictionary<string,int>();
+        string takeout = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -43,20 +44,21 @@ namespace WpfApp1
 
                 CheckBox cb = new CheckBox();
                 cb.Content = $"{drink.Key} : {drink.Value}元";
-                cb.Width = 200 ;
+                cb.Width = 200;
                 cb.FontFamily = new FontFamily("Consolas");
                 cb.FontSize = 18;
                 cb.Foreground = Brushes.Blue;
                 cb.Margin = new Thickness(5);
 
                 Slider sl = new Slider();
-                sl.Width = 100 ;
-                sl.Value = 0 ;
+                sl.Width = 100;
+                sl.Value = 0;
                 sl.Minimum = 0;
-                sl.Maximum = 10 ;
+                sl.Maximum = 10;
+                sl.IsSnapToTickEnabled = true;
 
                 Label lb = new Label();
-                lb.Width = 50 ;
+                lb.Width = 50;
                 lb.Content = "0";
                 lb.FontFamily = new FontFamily("Consolas");
                 lb.FontSize = 18;
@@ -65,6 +67,12 @@ namespace WpfApp1
                 sp.Children.Add(cb);
                 sp.Children.Add(sl);
                 sp.Children.Add(lb);
+
+                //資料繫結
+                Binding myBinding = new Binding("Value");
+                myBinding.Source = sl;
+                lb.SetBinding(ContentProperty, myBinding);
+
                 stackpenal_DrinkMenu.Children.Add(sp);
 
             }
@@ -78,24 +86,6 @@ namespace WpfApp1
             mydrinks.Add("綠茶小杯", 40);
             mydrinks.Add("咖啡大杯", 80);
             mydrinks.Add("咖啡小杯", 50);
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox targetTexBox = sender as TextBox;
-
-            bool succes = int.TryParse(targetTexBox.Text, out int amount);
-
-            if(!succes)MessageBox.Show("請輸入整數", "輸入錯誤");
-            else if(amount <= 0)  MessageBox.Show("請輸入正整數", "輸入錯誤");
-            else
-            {
-                StackPanel targetStackPanel = targetTexBox.Parent as StackPanel;
-                Label targetLabel = targetStackPanel.Children[0] as Label;
-                string drinkName = targetLabel.Content.ToString();
-                if(orders.ContainsKey(drinkName)) orders.Remove(drinkName);
-                orders.Add(drinkName, amount);
-            }
         }
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
@@ -136,6 +126,13 @@ namespace WpfApp1
             }
             displayString += $"本次訂購總共{orders.Count}項，{message}，售價{sellPrice}元";
             textblock1.Text = displayString;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            if(rb.IsChecked == true) takeout = rb.Content.ToString();
+            MessageBox.Show(takeout);
         }
     }
 }
