@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="MWM - 複製\" />
+    <Folder Include="MWM\" />
+    <Folder Include="images\" />
+    <Folder Include="fonts\" />
+  </ItemGroup>
+
 </Project>
