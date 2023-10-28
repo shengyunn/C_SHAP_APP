@@ -20,9 +20,48 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        String shapeType;
+        Color strokeColor = Colors.Red;
+        int strokeThickness = 1;
+        Brush strokeBrush = new SolidColorBrush(Colors.Red);
+        Point start, dest;
+
         public MainWindow()
         {
             InitializeComponent();
+            strokeColorPicker.SelectedColor = strokeColor;
+        }
+
+        private void ShapeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var targetRadioButton = sender as RadioButton;
+            shapeType = targetRadioButton.Tag.ToString();
+            //MessageBox.Show(shapeType);
+        }
+
+        private void myCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            start = e.GetPosition(myCanvas);
+            myCanvas.Cursor = Cursors.Cross;
+            switch (shapeType)
+            {
+                case "Line":
+                    break;
+                case "Rectangle":
+                    break;
+                case "Ellipse":
+                    break;
+            }
+        }
+
+        private void myCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void strokeThicknessSider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            strokeThickness = Convert.ToInt32(strokeThicknessSider.Value);
         }
     }
 }

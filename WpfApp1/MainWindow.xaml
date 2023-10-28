@@ -3,21 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="printer" Height="722" Width="968">
 
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top" Height="25">
-            <MenuItem Header="檔案" VerticalAlignment="center" >
+            <MenuItem Header="檔案" VerticalAlignment="Center" >
                 <MenuItem Header="新畫布"/>
             </MenuItem>
+            <MenuItem Header="工具"/>
         </Menu>
-        <ToolBarTray DockPanel.Dock="Top" Width="300" Height="50" HorizontalAlignment="Left">
-            <ToolBar HorizontalAlignment="center" Height="48" VerticalAlignment="Center">
-                <Label Content="筆刷色彩" Width="80" VerticalAlignment="Center" FontSize="16"/>
+        <ToolBarTray DockPanel.Dock="Top" Height="35">
+            <ToolBar HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="400" Background="#FFAAABED">
+                <Label Content="筆刷色彩" Width="80" VerticalAlignment="Center" FontSize="14"  Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <xctk:ColorPicker x:Name="strokeColorPicker" Width="125" DisplayColorAndName="True"/>
+                <Slider  Name="strokeThicknessSider" Value="1" Minimum="1" Maximum="10" Width="100" VerticalAlignment="Center" IsSnapToTickEnabled="True" Margin="10,0,0,0" ValueChanged="strokeThicknessSider_ValueChanged"/>
+                <Label Content="{Binding Value, ElementName=strokeThicknessSider}" FontSize="16" FontWeight="Bold" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            </ToolBar>
+            <ToolBar Width="300" Background="#FFBED3EC">
+                <RadioButton Content="直線" Width="60" FontSize="14" VerticalAlignment="center" Tag="Line" Click="ShapeButton_Click" IsChecked="True"/>
+                <RadioButton Content="矩形" Width="60" FontSize="14" VerticalAlignment="center" Tag="Rectangle" Click="ShapeButton_Click"/>
+                <RadioButton Content="橢圓" Width="60" FontSize="14" VerticalAlignment="center" Tag="Ellipse" Click="ShapeButton_Click"/>
             </ToolBar>
         </ToolBarTray>
+        <Canvas x:Name="myCanvas" DockPanel.Dock="Top" Height="600" Background="#FFEDEFE5" MouseLeftButtonDown="myCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove"/>
+        <StatusBar x:Name="myStatusBar" Width="970" DockPanel.Dock="Bottom" Background="#FF969696" Height="48"/>
     </DockPanel>
 
 </Window>
