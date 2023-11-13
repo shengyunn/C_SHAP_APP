@@ -1,5 +1,5 @@
 ﻿WpfApp1
-1.0.0.0
+
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\ryan0\source\repos\shengyunn\C_SHAP_APP\WpfApp1\App.xaml
 2-92093437
 
-6756881685
+4827527227
 194183970531
 MainWindow.xaml;MyDocumentViewer.xaml;
 
-True
+False
 
