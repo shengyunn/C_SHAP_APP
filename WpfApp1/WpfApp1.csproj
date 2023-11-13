@@ -8,7 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="delete.png" />
+    <None Remove="diagonal-line.png" />
+    <None Remove="ellipse.png" />
+    <None Remove="eraser.png" />
+    <None Remove="polyline.png" />
+    <None Remove="rounded-rectangle.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="delete.png" />
+    <Resource Include="diagonal-line.png" />
+    <Resource Include="ellipse.png" />
+    <Resource Include="eraser.png" />
+    <Resource Include="polyline.png" />
+    <Resource Include="rounded-rectangle.png" />
   </ItemGroup>
 
 </Project>
