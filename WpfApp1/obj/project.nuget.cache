@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "k/KbGt15fF5k66YomgoqiacW8qrofTLgq4581/5ris6G9zl516BlzxmAXjzsG3cmw+xcrfCjHBSlpxEuTWc8Hg==",
+  "dgSpecHash": "ZzcNIGaB9gokcrCCH7lTqDDbFzBd47aBLUaz4UZDMDL4k6egjJdde5fxS8I1k1d6HzSfJfaVf+/Vz9UEtz7C/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\ryan0\\source\\repos\\shengyunn\\C_SHAP_APP\\WpfApp1\\WpfApp1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ryan0\\.nuget\\packages\\extended.wpf.toolkit\\4.5.1\\extended.wpf.toolkit.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }
