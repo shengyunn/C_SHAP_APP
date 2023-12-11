@@ -24,5 +24,10 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void GetWebDataButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
