@@ -5,8 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="2023選課系統" Height="600" Width="1200">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="500*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Background="#FFFDDFDF" Grid.ColumnSpan="3">
+            <Label Content="學生" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,0,0,0"/>
+            <ComboBox x:Name="cmbStudent" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" SelectionChanged="cmbStudent_SelectionChanged"/>
+        </StackPanel>
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="3">
+            <Label x:Name="labelStatus" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,0,0,0" Width="300" Height="30" />
+        </StatusBar>
+        <TabControl Grid.Row="1" Background="#FFEAF1D9" >
+            <TabItem Header="以教師來分類課程">
+                <TreeView x:Name="tvTeacher" Background="#FFE2F6F2" SelectedItemChanged="tvTeacher_SelectedItemChanged">
+                    <TreeView.Resources>
+                        <!-- Teacher節點的模板-->
+                        <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="20" Height="20" Source="teacher.png" />
+                                <TextBlock Text="{Binding TeacherName}"/>
+                                <TextBlock Text="("/>
+                                <TextBlock Text="{Binding TeachingCourses.Count}"/>
+                                <TextBlock Text=")"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <!-- Course節點的模板-->
+                        <DataTemplate DataType="{x:Type local:Course}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="20" Height="20" Source="course.png"/>
+                                <TextBlock Text="{Binding CourseName}" FontWeight="Bold" Foreground="blue"/>
+                                <TextBlock Text=" : "/>
+                                <TextBlock Text="{Binding OpeningClass}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Type}"/>
+                                <TextBlock Text="{Binding Point}" Foreground="Red" FontWeight="Bold"/>
+                                <TextBlock Text="學分"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </TabItem>
+            <TabItem Header="所有課程">
+                <ListBox x:Name="lbCourse" Background="#FFFAF9E4" SelectionChanged="lbCourse_SelectionChanged">
+                    <ListBox.Resources>
+                        <DataTemplate DataType="{x:Type local:Course}">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding CourseName}" FontWeight="Bold" Foreground="blue"/>
+                                    <TextBlock Text=" : "/>
+                                    <TextBlock Text="{Binding Point}"/>
+                                    <TextBlock Text="學分"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Type}" />
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding OpeningClass}" Foreground="DarkBlue"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.Resources>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <Button x:Name="btnRegister" Content="選課" Width="80" Height="50" Margin="0,100,0,0" FontSize="16" FontWeight="Bold" Click="btnRegister_Click" />
+            <Button x:Name="btnWithdrawl" Content="退選" Width="80" Height="50" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" Click="btnWithdrawl_Click" />
+            <Button x:Name="btnSave" Content="儲存紀錄" Width="80" Height="50" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" Click="btnSave_Click" />
+        </StackPanel>
+        <ListView x:Name="lvRecord" ItemsSource="{Binding records}" Grid.Row="1" Grid.Column="2" Background="#FFE6DEFC" SelectionChanged="lvRecord_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="學號" DisplayMemberBinding="{Binding SelectedStudent.StudentId}"/>
+                    <GridViewColumn Header="姓名" DisplayMemberBinding="{Binding SelectedStudent.StudentName}"/>
+                    <GridViewColumn Header="課程名稱" DisplayMemberBinding="{Binding SelectedCourse.CourseName}"/>
+                    <GridViewColumn Header="學分" DisplayMemberBinding="{Binding SelectedCourse.Point}"/>
+                    <GridViewColumn Header="類別" DisplayMemberBinding="{Binding SelectedCourse.Type}"/>
+                    <GridViewColumn Header="開課班級" DisplayMemberBinding="{Binding SelectedCourse.OpeningClass}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
