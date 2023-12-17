@@ -8,12 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="04.jpg" />
+    <None Remove="221005020507_1489.jpg" />
+    <None Remove="c3bedacb-fafa-417a-87ff-b6bd472fb2db.jpg" />
     <None Remove="course.png" />
+    <None Remove="Cursed Cattos on Instagram_ “That%27s not very nice….jpg" />
+    <None Remove="Happy International Cat Day! 🐱❤️.jpg" />
     <None Remove="teacher.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="04.jpg" />
+    <Resource Include="221005020507_1489.jpg" />
+    <Resource Include="c3bedacb-fafa-417a-87ff-b6bd472fb2db.jpg" />
     <Resource Include="course.png" />
+    <Resource Include="Cursed Cattos on Instagram_ “That's not very nice….jpg" />
+    <Resource Include="Happy International Cat Day! 🐱❤️.jpg" />
     <Resource Include="teacher.png" />
   </ItemGroup>
 

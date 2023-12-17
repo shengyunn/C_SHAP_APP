@@ -17,7 +17,7 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="500*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" Background="#FFFDDFDF" Grid.ColumnSpan="3">
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
             <Label Content="學生" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,0,0,0"/>
             <ComboBox x:Name="cmbStudent" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" SelectionChanged="cmbStudent_SelectionChanged"/>
         </StackPanel>
@@ -26,7 +26,7 @@
         </StatusBar>
         <TabControl Grid.Row="1" Background="#FFEAF1D9" >
             <TabItem Header="以教師來分類課程">
-                <TreeView x:Name="tvTeacher" Background="#FFE2F6F2" SelectedItemChanged="tvTeacher_SelectedItemChanged">
+                <TreeView x:Name="tvTeacher" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" SelectedItemChanged="tvTeacher_SelectedItemChanged">
                     <TreeView.Resources>
                         <!-- Teacher節點的模板-->
                         <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
@@ -81,7 +81,10 @@
             <Button x:Name="btnWithdrawl" Content="退選" Width="80" Height="50" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" Click="btnWithdrawl_Click" />
             <Button x:Name="btnSave" Content="儲存紀錄" Width="80" Height="50" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" Click="btnSave_Click" />
         </StackPanel>
-        <ListView x:Name="lvRecord" ItemsSource="{Binding records}" Grid.Row="1" Grid.Column="2" Background="#FFE6DEFC" SelectionChanged="lvRecord_SelectionChanged">
+        <ListView x:Name="lvRecord" ItemsSource="{Binding records}" Grid.Row="1" Grid.Column="2" SelectionChanged="lvRecord_SelectionChanged">
+            <ListView.Background>
+                <ImageBrush ImageSource="/221005020507_1489.jpg"/>
+            </ListView.Background>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="學號" DisplayMemberBinding="{Binding SelectedStudent.StudentId}"/>
