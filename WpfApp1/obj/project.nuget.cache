@@ -1,8 +1,32 @@
 {
   "version": 2,
-  "dgSpecHash": "k/KbGt15fF5k66YomgoqiacW8qrofTLgq4581/5ris6G9zl516BlzxmAXjzsG3cmw+xcrfCjHBSlpxEuTWc8Hg==",
+  "dgSpecHash": "7yJNT64VGmzqb3qn0cj6IsRrV14CFNT1NABiv+7cv+1oWWxWDOkNdwJ5pZD3zJr52/jVjx9nbuIum0YUAvx2Ig==",
   "success": true,
   "projectFilePath": "C:\\Users\\ryan0\\source\\repos\\shengyunn\\C_SHAP_APP\\WpfApp1\\WpfApp1.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\ryan0\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
+    "C:\\Users\\ryan0\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用 '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' 而非專案目標架構 'net6.0-windows7.0' 還原了套件 'LiveCharts 0.9.7'。此套件與您的專案並非完全相容。",
+      "libraryId": "LiveCharts",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用 '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' 而非專案目標架構 'net6.0-windows7.0' 還原了套件 'LiveCharts.Wpf 0.9.7'。此套件與您的專案並非完全相容。",
+      "libraryId": "LiveCharts.Wpf",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }

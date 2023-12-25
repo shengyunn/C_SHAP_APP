@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="AQI空氣指標" Height="800" Width="1200">
@@ -19,14 +20,15 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="80" Width="Auto" Orientation="Horizontal">
+            <Image x:Name="cat_icon" Width="50" Height="50" Source="/Happy International Cat Day! 🐱❤️.jpg" Margin="20,0,0,0"/>
             <StackPanel Orientation="Vertical" Width="900">
                 <Label Content="每小時提供各測站之空氣品質指標（AQI），原始資料版本公告於空氣品質監測網https://airtw.moenv.gov.tw" Height="40" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="50, 0, 0, 0"/>
-                <TextBox x:Name="UrlTextBox" VerticalAlignment="Center" Height="40" Margin="50, 0, 0, 0" />
+                <TextBox x:Name="UrlTextBox" VerticalAlignment="Center" Height="40" Margin="50, 0, 0, 0" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
             </StackPanel>
-            <Button x:Name="GetWebDataButton" Content="抓取資料" VerticalAlignment="Center" Height="40" Width="100" Margin="50, 0, 0, 0" Click="GetWebDataButton_Click"/>
+            <Button x:Name="GetWebDataButton" Content="抓取資料" VerticalAlignment="Center" Height="40" Width="100" Margin="50, 0, 0, 0" Click="GetWebDataButton_Click" FontSize="14" FontWeight="Bold"/>
         </StackPanel>
 
-        <TextBox x:Name="ContentTextBox" Grid.Row="1" Grid.Column="0" Background="Beige"/>
+        <TextBox x:Name="ContentTextBox" Grid.Row="1" Grid.Column="0" Background="Azure" FontSize="14" FontFamily="Cascadia Code" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"  Background="LightGray"/>
 
@@ -37,12 +39,20 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Margin="2, 2, 2, 2" BorderBrush="Red" BorderThickness="1">
+            <Border Grid.Row="0" Margin="2, 2, 2, 2" BorderBrush="#FFB0D5D3" BorderThickness="1">
+                <DataGrid x:Name="RecordDataGrid" AutoGenerateColumns="True" SelectionChanged="RecordDataGrid_SelectionChanged" LoadingRow="RecordDataGrid_LoadingRow" IsReadOnly="True"/>
             </Border>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="LightGray"/>
-            <Border Grid.Row="2" Margin="2, 2, 2, 2" BorderBrush="Red" BorderThickness="1">
+            <Border Grid.Row="2" Margin="2, 2, 2, 2" BorderBrush="#FFB0D5D3" BorderThickness="1">
+                <WrapPanel Name="DataWrapPanel" Orientation="Horizontal" Margin="5, 5, 5, 5">
+                </WrapPanel>
             </Border>
-            <Border Grid.Row="3" Margin="2, 2, 2, 2" BorderBrush="Red" BorderThickness="1">
+            <Border Grid.Row="3" Margin="2, 2, 2, 2" BorderBrush="#FFB0D5D3" BorderThickness="1">
+                <lvc:CartesianChart x:Name="AQIChart" MinWidth="500">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="數值"/>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
             </Border>
         </Grid>
 
