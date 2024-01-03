@@ -31,7 +31,7 @@
                         <!-- Teacher節點的模板-->
                         <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Width="20" Height="20" Source="teacher.png" />
+                                <Image Width="20" Height="20" Source="/teacher.png" />
                                 <TextBlock Text="{Binding TeacherName}"/>
                                 <TextBlock Text="("/>
                                 <TextBlock Text="{Binding TeachingCourses.Count}"/>
@@ -41,7 +41,7 @@
                         <!-- Course節點的模板-->
                         <DataTemplate DataType="{x:Type local:Course}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Width="20" Height="20" Source="course.png"/>
+                                <Image Width="20" Height="20" Source="/course.png"/>
                                 <TextBlock Text="{Binding CourseName}" FontWeight="Bold" Foreground="blue"/>
                                 <TextBlock Text=" : "/>
                                 <TextBlock Text="{Binding OpeningClass}"/>
