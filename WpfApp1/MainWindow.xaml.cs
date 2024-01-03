@@ -18,29 +18,17 @@ namespace WpfApp1
     {
         // API 的 URL
         string url = "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON";
-
-        // AQI 資料物件
         AQIdata aqidata = new AQIdata();
-
-        // 存放欄位資訊的清單
         List<Field> fields = new List<Field>();
-
-        // 存放所有 AQI 記錄的清單
         List<Record> records = new List<Record>();
-
-        // 存放被選取的 AQI 記錄的清單
         List<Record> selectedRecords = new List<Record>();
-
-        // 存放 LiveCharts 的 SeriesCollection，用於顯示圖表
         SeriesCollection seriesCollection = new SeriesCollection();
 
-        // 主視窗的建構函式
         public MainWindow()
         {
             InitializeComponent();
             // 將 URL 設定到文字方塊
             UrlTextBox.Text = url;
-            // 清空被選取的 AQI 記錄清單
             selectedRecords.Clear();
         }
 
