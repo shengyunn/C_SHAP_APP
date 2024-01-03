@@ -16,12 +16,13 @@ namespace _2023_WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
+        // 宣告一些成員變數，用來存儲畫布的狀態
         String shapeType = "Line";
         String actionType = "Draw";
         Color strokeColor = Colors.Red;
         Color fillColor = Colors.Yellow;
         int strokeThickness = 1;
-
+        // 起始點和終點座標
         Point start, dest;
 
         public MainWindow()
@@ -30,7 +31,7 @@ namespace _2023_WpfApp3
             strokeColorPicker.SelectedColor = strokeColor;
             fillColorPicker.SelectedColor = fillColor;
         }
-
+        // 圖形按鈕點擊事件處理
         private void ShapeButton_Click(object sender, RoutedEventArgs e)
         {
             var targetRadioButton = sender as RadioButton;
@@ -39,12 +40,12 @@ namespace _2023_WpfApp3
             DisplayStatus();
             //MessageBox.Show(shapeType);
         }
-
+        // 畫筆粗細滑塊值變更事件處理
         private void strokeThicknessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             strokeThickness = Convert.ToInt32(strokeThicknessSlider.Value);
         }
-
+        // 畫布滑鼠移動事件處理
         private void myCanvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             dest = e.GetPosition(myCanvas);
@@ -98,7 +99,7 @@ namespace _2023_WpfApp3
                     break;
             }
         }
-
+        // 畫布滑鼠左鍵點擊事件處理
         private void myCanvas_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             start = e.GetPosition(myCanvas);
@@ -156,7 +157,7 @@ namespace _2023_WpfApp3
 
             DisplayStatus();
         }
-
+        // 顯示目前畫布狀態的方法
         private void DisplayStatus()
         {
             int lineCount = myCanvas.Children.OfType<Line>().Count();
@@ -166,23 +167,23 @@ namespace _2023_WpfApp3
             coordinateLabel.Content = $"{actionType}模式 || 座標點: ({Math.Round(start.X)}, {Math.Round(start.Y)}) : ({Math.Round(dest.X)}, {Math.Round(dest.Y)})";
             shapeLabel.Content = $"Line: {lineCount}, Rectangle: {rectCount}, Ellipse: {ellipseCount}, Polyline: {polylineCount}";
         }
-
+        // 畫筆顏色選擇器值變更事件處理
         private void strokeColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             strokeColor = (Color)strokeColorPicker.SelectedColor;
         }
-
+        // 填充顏色選擇器值變更事件處理
         private void fillColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             fillColor = (Color)fillColorPicker.SelectedColor;
         }
-
+        // 清空畫布選單項目點擊事件處理
         private void clearMenuItem_Click(object sender, RoutedEventArgs e)
         {
             myCanvas.Children.Clear();
             DisplayStatus();
         }
-
+        // 橡皮擦按鈕點擊事件處理
         private void eraseButton_Click(object sender, RoutedEventArgs e)
         {
             actionType = "Erase";
@@ -222,7 +223,7 @@ namespace _2023_WpfApp3
                 //MessageBox.Show($"Canvas content saved as {fileName}");
             }
         }
-
+        // 畫布滑鼠左鍵釋放事件處理
         private void myCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (actionType == "Draw")
