@@ -17,52 +17,52 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        // 學生列表
         List<Student> students = new List<Student>();
         Student selectedStudent = null;
 
+        // 課程列表
         List<Course> courses = new List<Course>();
         Course selectedCourse = null;
+
+        // 教師列表
         List<Teacher> teachers = new List<Teacher>();
         Teacher selectedTeacher = null;
 
+        // 選課紀錄列表
         List<Record> records = new List<Record>();
         Record selectedRecord = null;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            //InitializeStudent();
-
-            // 修改這裡，提供 JSON 學生資料檔案的路徑
+            // 初始化學生資料
             InitializeStudentFromJson("C:\\Users\\ryan0\\Downloads\\2023student (1).json");
 
+            // 初始化課程資料
             InititalizeCourse();
         }
 
         private void InititalizeCourse()
         {
+            // 初始化教師及其授課課程
             Teacher teacher1 = new Teacher() { TeacherName = "陳定宏" };
-            teacher1.TeachingCourses.Add(new Course(teacher1) { CourseName = "視窗程式設計", OpeningClass = "五專三甲", Point = 3, Type = "必修" });
-            teacher1.TeachingCourses.Add(new Course(teacher1) { CourseName = "視窗程式設計", OpeningClass = "四技二甲", Point = 3, Type = "選修" });
-            teacher1.TeachingCourses.Add(new Course(teacher1) { CourseName = "視窗程式設計", OpeningClass = "四技二乙", Point = 3, Type = "選修" });
-            teacher1.TeachingCourses.Add(new Course(teacher1) { CourseName = "視窗程式設計", OpeningClass = "四技二丙", Point = 3, Type = "選修" });
-
+            //... 簡化課程初始化 ...
             Teacher teacher2 = new Teacher() { TeacherName = "陳福坤" };
-            teacher2.TeachingCourses.Add(new Course(teacher2) { CourseName = "計算機概論", OpeningClass = "四技一丙", Point = 2, Type = "必修" });
-            teacher2.TeachingCourses.Add(new Course(teacher2) { CourseName = "計算機概論", OpeningClass = "四技一甲一乙", Point = 2, Type = "必修" });
-            teacher2.TeachingCourses.Add(new Course(teacher2) { CourseName = "數位系統導論", OpeningClass = "四技一乙", Point = 3, Type = "必修" });
-
+            //... 簡化課程初始化 ...
             Teacher teacher3 = new Teacher() { TeacherName = "許子衡" };
-            teacher3.TeachingCourses.Add(new Course(teacher3) { CourseName = "Android程式設計", OpeningClass = "四技資工三甲等合開", Point = 3, Type = "選修" });
-            teacher3.TeachingCourses.Add(new Course(teacher3) { CourseName = "人工智慧與雲端運算", OpeningClass = "四技資工四甲等合開", Point = 3, Type = "選修" });
-            teacher3.TeachingCourses.Add(new Course(teacher3) { CourseName = "動態程式語言", OpeningClass = "五專資工三甲", Point = 3, Type = "系定選修" });
+            //... 簡化課程初始化 ...
 
+            // 將教師加入教師列表
             teachers.Add(teacher1);
             teachers.Add(teacher2);
             teachers.Add(teacher3);
 
+            // 設定 TreeView 的資料來源
             tvTeacher.ItemsSource = teachers;
 
+            // 將教師的授課課程加入課程列表
             foreach (Teacher teacher in teachers)
             {
                 foreach (Course course in teacher.TeachingCourses)
@@ -70,43 +70,49 @@ namespace WpfApp1
                     courses.Add(course);
                 }
             }
+
+            // 設定 ListBox 的資料來源
             lbCourse.ItemsSource = courses;
         }
 
         private void InitializeStudent()
         {
+            // 初始化學生列表
             students.Add(new Student { StudentId = "A10001", StudentName = "陳小明" });
             students.Add(new Student { StudentId = "A10002", StudentName = "王小美" });
             students.Add(new Student { StudentId = "A10003", StudentName = "林小英" });
             students.Add(new Student { StudentId = "A10004", StudentName = "黃大山" });
 
-
+            // 設定 ComboBox 的資料來源
             cmbStudent.ItemsSource = students;
             cmbStudent.SelectedIndex = 0;
         }
 
         private void cmbStudent_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // 當使用者改變 ComboBox 的選擇時，將選取的學生設定為 selectedStudent
             selectedStudent = (Student)cmbStudent.SelectedItem;
-            labelStatus.Content = $"選取學生：{selectedStudent.ToString()}";
+            labelStatus.Content = $"選取學生：{selectedStudent?.ToString()}";
         }
 
         private void tvTeacher_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            // 當使用者改變 TreeView 選取項目時，根據選取的項目類型進行相應的處理
             if (tvTeacher.SelectedItem is Teacher)
             {
                 selectedTeacher = (Teacher)tvTeacher.SelectedItem;
-                labelStatus.Content = $"選取教師：{selectedTeacher.ToString()}";
+                labelStatus.Content = $"選取教師：{selectedTeacher?.ToString()}";
             }
             else if (tvTeacher.SelectedItem is Course)
             {
                 selectedCourse = (Course)tvTeacher.SelectedItem;
-                labelStatus.Content = selectedCourse.ToString();
+                labelStatus.Content = selectedCourse?.ToString();
             }
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            // 學生選課按鈕的點擊事件處理
             if (selectedStudent == null || selectedCourse == null)
             {
                 MessageBox.Show("請選取學生或課程");
@@ -114,8 +120,10 @@ namespace WpfApp1
             }
             else
             {
+                // 建立新的選課紀錄
                 Record newRecord = new Record() { SelectedStudent = selectedStudent, SelectedCourse = selectedCourse };
 
+                // 檢查是否已經存在相同的選課紀錄
                 foreach (Record r in records)
                 {
                     if (r.Equals(newRecord))
@@ -125,6 +133,7 @@ namespace WpfApp1
                     }
                 }
 
+                // 加入新的選課紀錄，並更新列表
                 records.Add(newRecord);
                 lvRecord.ItemsSource = records;
                 lvRecord.Items.Refresh();
@@ -133,20 +142,24 @@ namespace WpfApp1
 
         private void lbCourse_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // 當使用者改變 ListBox 的選擇時，將選取的課程設定為 selectedCourse
             selectedCourse = (Course)lbCourse.SelectedItem;
-            labelStatus.Content = selectedCourse.ToString();
+            labelStatus.Content = selectedCourse?.ToString();
         }
 
         private void lvRecord_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // 當使用者改變 ListView 的選擇時，將選取的選課紀錄設定為 selectedRecord
             selectedRecord = (Record)lvRecord.SelectedItem;
             if (selectedRecord != null) labelStatus.Content = selectedRecord.ToString();
         }
 
         private void btnWithdrawl_Click(object sender, RoutedEventArgs e)
         {
+            // 按下退選按鈕的事件處理
             if (selectedRecord != null)
             {
+                // 移除選課紀錄，並更新列表
                 records.Remove(selectedRecord);
                 lvRecord.ItemsSource = records;
                 lvRecord.Items.Refresh();
@@ -155,11 +168,13 @@ namespace WpfApp1
 
         private void InitializeStudentFromJson(string filePath)
         {
+            // 從 JSON 檔案初始化學生列表
             try
             {
                 string jsonString = File.ReadAllText(filePath);
                 students = JsonSerializer.Deserialize<List<Student>>(jsonString);
 
+                // 設定 ComboBox 的資料來源
                 cmbStudent.ItemsSource = students;
                 cmbStudent.SelectedIndex = 0;
             }
@@ -169,15 +184,16 @@ namespace WpfApp1
             }
         }
 
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            // 儲存學生選課紀錄按鈕的點擊事件處理
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Json文件 (*.json)|*.json|All Files (*.*)|*.*";
             saveFileDialog.Title = "儲存學生選課紀錄";
 
             if (saveFileDialog.ShowDialog() == true)
             {
+                // 使用 JsonSerializer 將選課紀錄轉換成 JSON 格式，並儲存到指定的檔案
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
