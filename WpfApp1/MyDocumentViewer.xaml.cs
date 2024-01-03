@@ -14,32 +14,37 @@ namespace WpfApp1
     /// </summary>
     public partial class MyDocumentViewer : Window
     {
+        // 預設字體顏色和背景色
         Color fontColor = Colors.Blue;
         Color backgroundColor = Colors.LightYellow;
         public MyDocumentViewer()
         {
             InitializeComponent();
+            // 初始化字體顏色選擇器和背景色選擇器
             fontColorPicker.SelectedColor = fontColor;
             backgroundColorPicker.SelectedColor = backgroundColor;
 
+            // 初始化字體家族組合框
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
             {
                 fontFamilyComboBox.Items.Add(fontFamily);
             }
             fontFamilyComboBox.SelectedIndex = 8;
-
+            // 初始化字體大小組合框
             fontSizeComboBox.ItemsSource = new List<Double>() { 8, 9, 10, 12, 20, 24, 32, 40, 50, 60, 80, 90 };
             fontSizeComboBox.SelectedIndex = 3;
         }
-
+        // 新建文件的命令處理
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             // 在這裡實現「新建」的操作，例如打開一個新文件、清空文檔等
             MyDocumentViewer myDocumentViewer = new MyDocumentViewer();
             myDocumentViewer.Show();
         }
+        // 打開文件的命令處理
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            // 使用 OpenFileDialog 選擇文件
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "RTF 檔案|*.rtf|HTML 檔案|*.html|所有檔案|*.*";
 
@@ -50,6 +55,7 @@ namespace WpfApp1
 
                 TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
 
+                // 根據文件格式載入內容
                 if (fileExtension.Equals(".rtf", StringComparison.OrdinalIgnoreCase))
                 {
                     // RTF 格式
@@ -72,10 +78,10 @@ namespace WpfApp1
                 }
             }
         }
-
+        // 儲存文件的命令處理
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
+            SaveFileDialog fileDialog = new SaveFileDialog(); // 使用 SaveFileDialog 選擇儲存位置和文件名稱
             fileDialog.Filter = "RTF 檔案|*.rtf|HTML 檔案|*.html|所有檔案|*.*";
 
             if (fileDialog.ShowDialog() == true)
@@ -108,7 +114,7 @@ namespace WpfApp1
             }
         }
 
-
+        // 編輯區域的選擇變更事件
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
             //判斷選中的文字是否為粗體，並同步更新boldButton的狀態
@@ -138,7 +144,7 @@ namespace WpfApp1
                 fontColorPicker.SelectedColor = foregroundProperty.Color;
             }
         }
-
+        // 字體色彩選擇器的選擇變更事件
         private void fontColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             fontColor = (Color)e.NewValue;
@@ -166,7 +172,7 @@ namespace WpfApp1
         {
             rtbEditor.Document.Blocks.Clear();
         }
-
+        // 背景色選擇器的選擇變更事件
         private void BackgroundColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             if (backgroundColorPicker.SelectedColor.HasValue)
